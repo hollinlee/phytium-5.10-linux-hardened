@@ -1,0 +1,35 @@
+# SPDX-License-Identifier: GPL-2.0
+menuconfig PHYTIUM_PMU
+	bool "Phytium PMU support"
+	help
+	  Say Y here if you want to support Phytium performance monitoring
+	  unit (PMU) drivers.
+
+if PHYTIUM_PMU
+
+config PHYT_DMU_PMU_PD2408
+        tristate "Phytium PD2408 SoC DMU PMU driver"
+        depends on (ARCH_PHYTIUM && ACPI && ARM_PHYTIUM_DMU_DEVFREQ) || COMPILE_TEST || (ARCH_PHYTIUM && ACPI && !ARM_PHYTIUM_DMU_DEVFREQ)
+	default m
+        help
+          Provides support for Phytium PD2408 SoC DDR memory Controller
+	  performance monitoring unit (PMU).
+
+config PHYT_DDR_PMU
+        tristate "Phytium SoC DDR PMU driver"
+        depends on (ARCH_PHYTIUM && ACPI) || COMPILE_TEST
+	default m
+        help
+          Provides support for Phytium SoC DDR Controller performance
+	  monitoring unit (PMU).
+
+config PHYT_PCIE_PMU
+	tristate "Phytium SoC PCIE PMU driver"
+	depends on (ARCH_PHYTIUM && ACPI) || COMPILE_TEST
+	default m
+	help
+	  Provides support for Phytium SoC PCIe Controller performance
+	  monitoring unit (PMU).
+
+endif
+
